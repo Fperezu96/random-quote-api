@@ -1,0 +1,1 @@
+{"root":["./app.ts","./server.ts","./src/config/config.ts","./src/controllers/quotecontroller.ts","./src/models/quote.ts","./src/routes/quotes.ts","./src/routes/routes.ts","./src/seed/seedquotes.ts","./src/utils/logger.ts","./tests/quotecontroller.test.ts","./tests/quoteroute.test.ts"],"version":"5.8.3"}

@@ -1,0 +1,244 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"Quote": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"text": {
+						"type": "string"
+					},
+					"author": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"text",
+					"author"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ErrorResponse": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"details": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ValidationErrorResponse": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"field": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "random-quote-api",
+		"version": "1.0.0",
+		"contact": {}
+	},
+	"paths": {
+		"/quotes": {
+			"get": {
+				"operationId": "GetAllQuotes",
+				"responses": {
+					"200": {
+						"description": "Successfully retrieved all quotes",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Quote"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Failed to retrieve quotes from database",
+											"details": "An unexpected error occurred while fetching quotes"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Quotes"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/quotes/ids": {
+			"get": {
+				"operationId": "GetAllQuoteIds",
+				"responses": {
+					"200": {
+						"description": "Successfully retrieved all quote IDs",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"type": "string"
+									},
+									"type": "array"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Failed to retrieve quote IDs from database",
+											"details": "An unexpected error occurred while fetching quote IDs"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Quotes"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/quotes/{id}": {
+			"get": {
+				"operationId": "GetQuoteById",
+				"responses": {
+					"200": {
+						"description": "Successfully retrieved quote",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Quote"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid ID Format",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ValidationErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "The provided ID is not a valid MongoDB ObjectId",
+											"field": "id"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Quote Not Found",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "No quote found with the specified ID"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Failed to retrieve quote from database",
+											"details": "An unexpected error occurred while fetching the quote"
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Quotes"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/api"
+		}
+	]
+}
