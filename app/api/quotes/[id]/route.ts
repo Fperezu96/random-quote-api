@@ -12,21 +12,23 @@ export async function GET(_req: NextRequest, context: { params: { id: string } }
       return NextResponse.json({ message: 'ID parameter is required' }, { status: 400 });
     }
 
-    // Validate MongoDB ObjectId format
+    // Validate MongoDB ObjectId format BEFORE converting
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return NextResponse.json({ message: 'Invalid ID format' }, { status: 400 });
-    }
+    } 
 
+    const objectId = new mongoose.Types.ObjectId(id);
+    
     await connectToDatabase();
-    const quote = await Quote.findById(id).lean();
-    const cleanedQuote = quote!.map(({ author, quote }) => ({ author, quote }));
 
-    if (!quote) {
+    const filteredQuote = await Quote.findById(objectId);
+
+    if (!filteredQuote) {
       return NextResponse.json({ message: 'Quote not found' }, { status: 404 });
     }
 
-    // Return only author and quote
-    return NextResponse.json(cleanedQuote);
+    const { author, quote } = filteredQuote;
+    return NextResponse.json({ author, quote });
 
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : 'Internal server error';
