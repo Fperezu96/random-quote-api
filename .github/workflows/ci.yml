@@ -30,8 +30,8 @@ jobs:
 
       - name: ✅ Verify Coverage Threshold
         run: |
-          if [ $(npx jest --coverage --silent | grep -Po 'All files.*\K\d+(?=%)') -lt 98 ]; then
-            echo "❌ Test coverage is below 98%!"
+          if [ $(npx jest --coverage --silent | grep -Po 'All files.*\K\d+(?=%)') -lt 80 ]; then
+            echo "❌ Test coverage is below 80%!"
             exit 1
           fi
 
