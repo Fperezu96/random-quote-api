@@ -1,32 +1,35 @@
 {
   "name": "random-quote-api",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "dev": "vercel dev",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prepare": "husky install",
     "test": "jest",
-    "tsoa:routes": "tsoa routes",
-    "tsoa:spec": "tsoa spec"
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.14.2",
-    "dotenv": "^16.0.0",
-    "mongoose": "^7.0.0",
-    "next": "^15.4.5",
-    "tsoa": "^6.6.0",
-    "typescript": "^5.8.3",
-    "vercel": "^44.6.4",
-    "winston": "^3.17.0"
+    "mongoose": "^8.0.0",
+    "next": "14.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
-    "@types/supertest": "^6.0.3",
-    "jest": "^29.7.0",
-    "supertest": "^6.0.0",
-    "ts-jest": "^29.4.0"
-  },
-  "description": "A simple API to fetch random quotes",
-  "author": "Felipe Perez",
-  "license": "MIT",
-  "private": true
+    "@types/node": "^20.4.0",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.0",
+    "husky": "^9.1.7",
+    "jest": "^30.0.5",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.4.0"
+  }
 }

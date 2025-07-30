@@ -1,27 +1,13 @@
-// File: src/models/Quote.ts
-import { Schema, model, Document } from 'mongoose';
+import mongoose, { Schema, Document, models } from 'mongoose';
 
-// Plain interface for tsoa - no mongoose types
-export interface Quote {
-  _id?: string;
-  quote: string;
+export interface IQuote extends Document {
   author: string;
-}
-
-// Mongoose document interface for internal use
-export interface IQuoteDocument extends Document {
   quote: string;
-  author: string;
 }
 
-export class QuoteResponse {
-  quote!: string;
-  author!: string;
-}
-
-const quoteSchema = new Schema<IQuoteDocument>({
-  quote: { type: String, required: true },
+const QuoteSchema = new Schema<IQuote>({
   author: { type: String, required: true },
+  quote: { type: String, required: true }
 });
 
-export default model<IQuoteDocument>('Quote', quoteSchema);
+export const Quote = models.Quote || mongoose.model<IQuote>('Quote', QuoteSchema);
