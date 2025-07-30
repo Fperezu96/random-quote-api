@@ -1,8 +1,9 @@
 import { Controller, Get, Path, Route, Tags, Response, SuccessResponse } from 'tsoa';
-import QuoteModel, { Quote, QuoteResponse } from '../models/Quote';
+import QuoteModel, { QuoteResponse } from '../models/Quote';
 import mongoose from 'mongoose';
 import logger from '../utils/logger';
 import { ValidationError, NotFoundError, DatabaseError, ErrorResponse, ValidationErrorResponse } from '../utils/errorHandler';
+
 @Route('quotes')
 @Tags('Quotes')
 export class QuoteController extends Controller {
