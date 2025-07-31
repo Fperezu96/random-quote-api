@@ -1,5 +1,5 @@
-import { connectToDatabase } from '../../../../src/utils/db';
-import { Quote } from '../../../../src/models/Quote';
+import { connectToDatabase } from '../../../../utils/db';
+import { Quote } from '../../../../models/Quote';
 import { NextRequest, NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 

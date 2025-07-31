@@ -1,9 +1,9 @@
-import { GET } from '../../../../pages/api/quotes/route';
-import * as db from '../../../utils/db';
-import { Quote } from '../../../models/Quote';
+import { GET } from '../../app/api/quotes/route';
+import * as db from '../../utils/db';
+import { Quote } from '../../models/Quote';
 
-jest.mock('../../../../src/utils/db');
-jest.mock('../../../../src/models/Quote');
+jest.mock('../../utils/db');
+jest.mock('../../models/Quote');
 
 describe('GET /api/quotes/', () => {
   beforeEach(() => {
