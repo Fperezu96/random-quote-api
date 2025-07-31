@@ -5,7 +5,7 @@ const config: Config = {
   testEnvironment: 'node',
   testMatch: ['**/__tests__/**/*.test.ts'],
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.ts', 'app/api/**/*.ts'],
+  collectCoverageFrom: ['src/**/*.ts', 'pages/api/**/*.ts'],
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {

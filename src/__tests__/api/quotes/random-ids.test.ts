@@ -1,4 +1,4 @@
-import { GET } from '../../../../app/api/quotes/random-id/route';
+import { GET } from '../../../../pages/api/quotes/random-id/route';
 import { Quote } from '../../../../src/models/Quote';
 
 jest.mock('../../../../src/utils/db');
