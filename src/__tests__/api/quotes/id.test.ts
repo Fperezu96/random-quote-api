@@ -1,11 +1,11 @@
-import { GET } from '../../app/api/quotes/[id]/route';
+import { GET } from '../../../app/api/quotes/[id]/route';
 import { NextRequest } from 'next/server';
-import * as db from '../../utils/db';
-import { Quote } from '../../models/Quote';
+import * as db from '../../../utils/db';
+import { Quote } from '../../../models/Quote';
 import mongoose from 'mongoose';
 
-jest.mock('../../../../src/utils/db');
-jest.mock('../../../../src/models/Quote');
+jest.mock('../../../utils/db');
+jest.mock('../../../models/Quote');
 
 describe('GET /api/quotes/[id]', () => {
   beforeEach(() => {

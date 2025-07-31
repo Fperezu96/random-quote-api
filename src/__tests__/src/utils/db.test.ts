@@ -35,14 +35,14 @@ describe('connectToDatabase', () => {
     await db.connectToDatabase(); 
     expect(mongoose.connect).toHaveBeenCalledTimes(1);
   });
-/*
+
   it('should throw error if MONGO_URI is not set', async () => {
     delete process.env.MONGO_URI;
     await expect(() => import('../../../../src/utils/db')).rejects.toThrow(
       'MONGO_URI not defined in .env file'
     );
   });
-*/
+
   it('should close the connection if connected', async () => {
     const db = await import('../../../../src/utils/db');
     await db.connectToDatabase();
