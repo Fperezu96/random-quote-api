@@ -1,11 +1,6 @@
 import mongoose from 'mongoose';
-
-declare global {
-  var mongoose: {
-    conn: typeof mongoose | null;
-    promise: Promise<typeof mongoose> | null;
-  };
-}
+import dotenv from 'dotenv';
+dotenv.config(); 
 
 const MONGO_URI = process.env.MONGO_URI;
 
