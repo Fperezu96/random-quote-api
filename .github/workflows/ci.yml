@@ -7,7 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  ci-flow:  
+    name: 🧪 Commit → Unit Test → 🚀 Deploy to Vercel
     runs-on: ubuntu-latest
 
     steps:
