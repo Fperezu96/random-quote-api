@@ -2,19 +2,15 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 declare global {
-  var mongoose: {
-    conn: typeof mongoose | null;
-    promise: Promise<typeof mongoose> | null;
-  } | undefined;
+  var mongoose:
+    | {
+        conn: typeof mongoose | null;
+        promise: Promise<typeof mongoose> | null;
+      }
+    | undefined;
 }
 
-dotenv.config(); 
-
-const MONGO_URI = process.env.MONGO_URI;
-
-if (!MONGO_URI) {
-  throw new Error('MONGO_URI not defined in .env file');
-}
+dotenv.config();
 
 let cached = global.mongoose as {
   conn: typeof mongoose | null;
@@ -27,6 +23,12 @@ if (!cached) {
 
 export async function connectToDatabase() {
   if (cached.conn) return cached.conn;
+
+  const MONGO_URI = process.env.MONGO_URI;
+
+  if (!MONGO_URI) {
+    throw new Error('MONGO_URI not defined in .env file');
+  }
 
   if (!cached.promise) {
     cached.promise = mongoose.connect(MONGO_URI!).then((conn) => {
