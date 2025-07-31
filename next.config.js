@@ -1,13 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/api/quotes',
-        permanent: true, 
-      },
-    ];
+  output: 'standalone',
+  experimental: {
+    serverActions: true,
   },
 };
+
 module.exports = nextConfig;

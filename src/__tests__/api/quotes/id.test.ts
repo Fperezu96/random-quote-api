@@ -1,4 +1,4 @@
-import { GET } from '../../../app/api/quotes/[id]/route';
+import { GET } from '../../../../app/api/quotes/[id]/route';
 import { NextRequest } from 'next/server';
 import * as db from '../../../utils/db';
 import { Quote } from '../../../models/Quote';

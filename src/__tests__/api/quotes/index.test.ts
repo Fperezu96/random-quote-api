@@ -1,4 +1,4 @@
-import { GET } from '../../../app/api/quotes/route';
+import { GET } from '../../../../app/api/quotes/route';
 import * as db from '../../../utils/db';
 import { Quote } from '../../../models/Quote';
 
