@@ -23,7 +23,7 @@ export async function GET() {
       });
     }
     return new NextResponse(JSON.stringify({ id: randomQuote._id }), {
-      status: 404,
+      status: 200,
       headers: {
         ...corsHeaders,
       },

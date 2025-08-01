@@ -12,7 +12,7 @@ export async function GET() {
   await connectToDatabase();
   const quotes = await Quote.find().lean();
   const cleanedQuotes = quotes.map(({ author, quote }) => ({ author, quote }));
-  return new NextResponse(JSON.stringify({ data: cleanedQuotes}), {
+  return new NextResponse(JSON.stringify({ cleanedQuotes}), {
     status: 200,
     headers: {
       ...corsHeaders
