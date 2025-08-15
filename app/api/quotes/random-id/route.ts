@@ -12,8 +12,8 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   'Content-Type': 'application/json',
   'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
-  'Pragma': 'no-cache',
-  'Expires': '0',
+  Pragma: 'no-cache',
+  Expires: '0',
 };
 
 export function OPTIONS() {
@@ -22,10 +22,14 @@ export function OPTIONS() {
 
 export async function GET() {
   try {
-    noStore()
+    noStore();
     await connectToDatabase();
 
-    const [randomQuote] = await Quote.aggregate([{ $sample: { size: 1 } }]);
+    const [randomQuote] = await Quote.aggregate([
+      { $addFields: { r: { $rand: {} } } },
+      { $sort: { r: 1 } },
+      { $limit: 1 },
+    ]);
 
     if (!randomQuote) {
       return new NextResponse(JSON.stringify({ message: 'No quotes found' }), {
