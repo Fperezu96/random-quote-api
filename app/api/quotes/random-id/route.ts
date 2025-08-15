@@ -1,7 +1,7 @@
 import { connectToDatabase } from '../../../../src/utils/db';
 import { Quote } from '../../../../src/models/Quote';
 import { NextResponse } from 'next/server';
-import { noStore } from 'next/cache';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
