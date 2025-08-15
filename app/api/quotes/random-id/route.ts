@@ -47,12 +47,18 @@ export async function GET() {
         },
       });
     }
-    return new NextResponse(JSON.stringify({ id: randomQuote._id }), {
-      status: 200,
-      headers: {
-        ...corsHeaders,
+    return new NextResponse(
+      JSON.stringify({
+        id: randomQuote._id,
+        debug: { now: Date.now(), rand: Math.random() },
+      }),
+      {
+        status: 200,
+        headers: {
+          ...corsHeaders,
+        },
       },
-    });
+    );
   } catch (error: unknown) {
     const errorMessage =
       error instanceof Error ? error.message : 'Internal server error';
