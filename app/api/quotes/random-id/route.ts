@@ -50,7 +50,6 @@ export async function GET() {
     return new NextResponse(
       JSON.stringify({
         id: randomQuote._id,
-        debug: { now: Date.now(), rand: Math.random() },
       }),
       {
         status: 200,
