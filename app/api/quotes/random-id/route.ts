@@ -1,16 +1,28 @@
 import { connectToDatabase } from '../../../../src/utils/db';
 import { Quote } from '../../../../src/models/Quote';
 import { NextResponse } from 'next/server';
+import { noStore } from 'next/cache';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
+  'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+  'Pragma': 'no-cache',
+  'Expires': '0',
 };
+
+export function OPTIONS() {
+  return new NextResponse(null, { status: 204, headers: corsHeaders });
+}
 
 export async function GET() {
   try {
+    noStore()
     await connectToDatabase();
 
     const [randomQuote] = await Quote.aggregate([{ $sample: { size: 1 } }]);
