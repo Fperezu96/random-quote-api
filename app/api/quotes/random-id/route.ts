@@ -2,9 +2,16 @@ import { connectToDatabase } from '../../../../src/utils/db';
 import { Quote } from '../../../../src/models/Quote';
 import { NextResponse } from 'next/server';
 import { unstable_noStore as noStore } from 'next/cache';
+import { Types } from 'mongoose';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
+
+type QuoteOut = {
+  _id?: Types.ObjectId | string; 
+  quote?: string;
+  author?: string;
+}
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -27,7 +34,7 @@ export async function GET() {
 
     const count = await Quote.countDocuments();
     const random = Math.floor(Math.random() * count);
-    const randomQuote = await Quote.findOne().skip(random).lean();
+    const randomQuote = await Quote.findOne<QuoteOut>().skip(random).lean();
 
     if (!randomQuote) {
       return new NextResponse(JSON.stringify({ message: 'No quotes found' }), {
