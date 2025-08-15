@@ -8,10 +8,10 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 type QuoteOut = {
-  _id?: Types.ObjectId | string; 
+  _id?: Types.ObjectId | string;
   quote?: string;
   author?: string;
-}
+};
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -33,8 +33,11 @@ export async function GET() {
     await connectToDatabase();
 
     const count = await Quote.countDocuments();
-    const random = Math.floor(Math.random() * count);
-    const randomQuote = await Quote.findOne<QuoteOut>().skip(random).lean();
+    const offset = Math.floor(Math.random() * count);
+    const randomQuote = await Quote.findOne({})
+      .skip(offset)
+      .select({ _id: 1, text: 1, author: 1 })
+      .lean<QuoteOut>();
 
     if (!randomQuote) {
       return new NextResponse(JSON.stringify({ message: 'No quotes found' }), {
