@@ -25,11 +25,9 @@ export async function GET() {
     noStore();
     await connectToDatabase();
 
-    const [randomQuote] = await Quote.aggregate([
-      { $addFields: { r: { $rand: {} } } },
-      { $sort: { r: 1 } },
-      { $limit: 1 },
-    ]);
+    const count = await Quote.countDocuments();
+    const random = Math.floor(Math.random() * count);
+    const randomQuote = await Quote.findOne().skip(random).lean();
 
     if (!randomQuote) {
       return new NextResponse(JSON.stringify({ message: 'No quotes found' }), {
